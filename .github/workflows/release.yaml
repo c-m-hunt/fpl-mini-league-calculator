@@ -22,7 +22,7 @@ jobs:
       - name: Set up Deno
         uses: denoland/setup-deno@v2
         with:
-          deno-version: canary
+          deno-version: v2.x
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v2
         with:
