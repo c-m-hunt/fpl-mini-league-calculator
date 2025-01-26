@@ -8,10 +8,16 @@ deno install
 
 ## Usage
 
+### Compile the code
+
+```bash
+deno compile --allow-read --allow-write --allow-env --allow-net --output fplml main.ts
+```
+
 ### Generate a config file
 
 ```bash
-deno run --allow-all main.ts genconfig
+fplml genconfig
 ```
 
 ### Update the config
@@ -21,5 +27,5 @@ Update the config manually with the week numbers and the manager IDs
 ### Run the calculator
 
 ```bash
-deno run --allow-all main.ts calc
+fplml calc
 ```
