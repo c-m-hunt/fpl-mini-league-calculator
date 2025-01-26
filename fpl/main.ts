@@ -43,8 +43,9 @@ export const calculateLeagueTable = async (
       id: manager.id,
       name: `${manager.player_first_name} ${manager.player_last_name}`,
       teamName: manager.name,
-      totalPoints: 0,
-      totalRank: manager.summary_overall_rank,
+      seasonPoints: manager.summary_overall_points,
+      miniLeaguePoints: 0,
+      seasonRank: manager.summary_overall_rank,
       weeklyPoints: history.current.filter((week) =>
         config.weekNumbers.includes(week.event)
       )
@@ -57,13 +58,13 @@ export const calculateLeagueTable = async (
   }
 
   for (const manager of leagueTable.managers) {
-    manager.totalPoints = manager.weeklyPoints.reduce((acc, points) =>
+    manager.miniLeaguePoints = manager.weeklyPoints.reduce((acc, points) =>
       acc + points
     );
   }
 
   // Sort the managers by total points
-  leagueTable.managers.sort((a, b) => b.totalPoints - a.totalPoints);
+  leagueTable.managers.sort((a, b) => b.miniLeaguePoints - a.miniLeaguePoints);
 
   return leagueTable;
 };
@@ -72,13 +73,13 @@ export const printLeagueTable = (leagueTable: LeagueTable) => {
   console.log(
     `Rank,Manager,Team,${
       leagueTable.weeks.map((wkNo) => `Week ${wkNo}`).join(",")
-    },Total`,
+    },Mini League Total,Season Total,Season Rank`,
   );
   leagueTable.managers.forEach((manager, index) => {
     console.log(
       `${index + 1},"${manager.name}","${manager.teamName}",${
         manager.weeklyPoints.join(",")
-      },${manager.totalPoints}`,
+      },${manager.miniLeaguePoints},${manager.seasonPoints},${manager.seasonRank}`,
     );
   });
 };

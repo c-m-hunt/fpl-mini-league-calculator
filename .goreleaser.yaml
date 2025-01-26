@@ -37,7 +37,7 @@ builds:
     #
     # Default: 'deno'.
     # Templates: allowed.
-    tool: "deno-canary"
+    tool: "deno"
 
     # Custom flags.
     #

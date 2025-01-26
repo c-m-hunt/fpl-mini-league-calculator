@@ -142,8 +142,9 @@ export type LeagueTable = {
     id: number;
     name: string;
     teamName: string;
-    totalPoints: number;
-    totalRank: number;
+    seasonPoints: number;
+    seasonRank: number;
+    miniLeaguePoints: number;
     weeklyPoints: number[];
     weeklyRank: number[];
   }[];
