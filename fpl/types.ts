@@ -22,7 +22,6 @@ interface PastSeasonData {
 export interface HistoryApiResponse {
   current: EventData[];
   past: PastSeasonData[];
-  chips: any[]; // If you know the structure of chips, replace `any[]` with the correct type.
 }
 
 interface LeaguePhase {

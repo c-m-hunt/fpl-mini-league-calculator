@@ -1,32 +1,6 @@
-import {
-  Config,
-  HistoryApiResponse,
-  LeagueTable,
-  ManagerApiResponse,
-} from "./types.ts";
+import { Config, LeagueTable } from "./types.ts";
 import logger from "../logger.ts";
-
-const getHistoryApiResource = async (
-  managerId: number,
-): Promise<HistoryApiResponse> => {
-  logger.debug(`Fetching history for manager ${managerId}`);
-  const response = await fetch(
-    `https://fantasy.premierleague.com/api/entry/${managerId}/history/`,
-  );
-  logger.debug(`Response: ${response.status}`);
-  return response.json();
-};
-
-const getManagerApiResponse = async (
-  managerId: number,
-): Promise<ManagerApiResponse> => {
-  logger.debug(`Fetching manager ${managerId}`);
-  const response = await fetch(
-    `https://fantasy.premierleague.com/api/entry/${managerId}/`,
-  );
-  logger.debug(`Response: ${response.status}`);
-  return response.json();
-};
+import { getHistoryApiResource, getManagerApiResponse } from "./api.ts";
 
 export const calculateLeagueTable = async (
   config: Config,
@@ -39,6 +13,9 @@ export const calculateLeagueTable = async (
   for (const managerId of config.managerIds) {
     const manager = await getManagerApiResponse(managerId);
     const history = await getHistoryApiResource(managerId);
+    logger.debug(
+      `Got details for manager ${manager.player_first_name} ${manager.player_last_name}`,
+    );
     leagueTable.managers.push({
       id: manager.id,
       name: `${manager.player_first_name} ${manager.player_last_name}`,
