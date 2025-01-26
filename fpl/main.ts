@@ -76,7 +76,7 @@ export const printLeagueTable = (leagueTable: LeagueTable) => {
   );
   leagueTable.managers.forEach((manager, index) => {
     console.log(
-      `${index + 1},${manager.name},${manager.teamName},${
+      `${index + 1},"${manager.name}","${manager.teamName}",${
         manager.weeklyPoints.join(",")
       },${manager.totalPoints}`,
     );
