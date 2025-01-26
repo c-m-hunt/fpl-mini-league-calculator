@@ -13,7 +13,7 @@ const program = new Denomander({
 
 program
   .command("calc", "Calculate the league table")
-  .option("-f --file-path", "Define the file path")
+  .option("-f --file", "Define the file path")
   .action(async ({ file }: { file: string }) => {
     logger.debug("Reading configuration file");
     const fileName = file || defaultConfigFileName;
